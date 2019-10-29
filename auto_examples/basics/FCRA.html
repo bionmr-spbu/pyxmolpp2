@@ -1,0 +1,420 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Frame/Chain/Residue/Atom hierarchy &mdash; pyxmolpp2 0.10.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Torsion Angles" href="torsion_angle.html" />
+    <link rel="prev" title="Reorder atoms/residues" href="reorder_atoms.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> pyxmolpp2
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.10
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Examples</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples gallery</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#read-write-pdb-files">Read/Write PDB files</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#basics">Basics</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="array_indexing.html">Numpy-style array indexing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="angles.html">AngleValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reorder_atoms.html">Reorder atoms/residues</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Frame/Chain/Residue/Atom hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="torsion_angle.html">Torsion Angles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="selections.html">Selections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="RMSD.html">RMSD/RMSF calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SASA.html">Solvent Accessible Solvent Area (SASA)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../pyxmolpp2/amber.html">pyxmolpp2.amber</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyxmolpp2/crystal.html">pyxmolpp2.crystal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyxmolpp2/geometry.html">pyxmolpp2.geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyxmolpp2/pdb.html">pyxmolpp2.pdb</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyxmolpp2/polymer.html">pyxmolpp2.polymer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyxmolpp2/trajectory.html">pyxmolpp2.trajectory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyxmolpp2/trjtool.html">pyxmolpp2.trjtool</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pyxmolpp2</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Examples gallery</a> &raquo;</li>
+        
+      <li>Frame/Chain/Residue/Atom hierarchy</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/auto_examples/basics/FCRA.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-auto-examples-basics-fcra-py"><span class="std std-ref">here</span></a> to download the full example code</p>
+</div>
+<div class="sphx-glr-example-title section" id="frame-chain-residue-atom-hierarchy">
+<span id="sphx-glr-auto-examples-basics-fcra-py"></span><h1>Frame/Chain/Residue/Atom hierarchy<a class="headerlink" href="#frame-chain-residue-atom-hierarchy" title="Permalink to this headline">¶</a></h1>
+<p>The <cite>pyxmolpp2</cite> library implements <a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.Frame" title="pyxmolpp2.polymer.Frame"><code class="xref py py-class docutils literal notranslate"><span class="pre">Frame</span></code></a>/<a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.Chain" title="pyxmolpp2.polymer.Chain"><code class="xref py py-class docutils literal notranslate"><span class="pre">Chain</span></code></a>/<a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.Residue" title="pyxmolpp2.polymer.Residue"><code class="xref py py-class docutils literal notranslate"><span class="pre">Residue</span></code></a>/<a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.Atom" title="pyxmolpp2.polymer.Atom"><code class="xref py py-class docutils literal notranslate"><span class="pre">Atom</span></code></a> hierarchy to represent a molecular system.</p>
+<p>Every <a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.Atom" title="pyxmolpp2.polymer.Atom"><code class="xref py py-class docutils literal notranslate"><span class="pre">Atom</span></code></a> exists as a part of some <a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.Residue" title="pyxmolpp2.polymer.Residue"><code class="xref py py-class docutils literal notranslate"><span class="pre">Residue</span></code></a>. <a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.Residue" title="pyxmolpp2.polymer.Residue"><code class="xref py py-class docutils literal notranslate"><span class="pre">Residue</span></code></a> is always a part of <a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.Chain" title="pyxmolpp2.polymer.Chain"><code class="xref py py-class docutils literal notranslate"><span class="pre">Chain</span></code></a>. <a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.Chain" title="pyxmolpp2.polymer.Chain"><code class="xref py py-class docutils literal notranslate"><span class="pre">Chain</span></code></a> is always a part of <a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.Frame" title="pyxmolpp2.polymer.Frame"><code class="xref py py-class docutils literal notranslate"><span class="pre">Frame</span></code></a>.</p>
+<p>For instance this implies that you can not create an <a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.Atom" title="pyxmolpp2.polymer.Atom"><code class="xref py py-class docutils literal notranslate"><span class="pre">Atom</span></code></a> without pre-existed <a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.Residue" title="pyxmolpp2.polymer.Residue"><code class="xref py py-class docutils literal notranslate"><span class="pre">Residue</span></code></a>.
+Why not allow <code class="docutils literal notranslate"><span class="pre">Atom.residue</span></code> to be <code class="xref py py-class docutils literal notranslate"><span class="pre">None</span></code> if Atom exists by it’s own?
+The choice was between flexibility of construction code versus complexity of it’s further usage.
+The rationale behind that design decision is fact that expression <code class="docutils literal notranslate"><span class="pre">atom.residue.chain.frame.index</span></code>
+is always correct, and no <cite>not-None</cite> checks are required. Such checks across the library and user code would
+increases it’s complexity and make it more prone to errors.</p>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p><a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.Atom" title="pyxmolpp2.polymer.Atom"><code class="xref py py-class docutils literal notranslate"><span class="pre">Atom</span></code></a>/<a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.Residue" title="pyxmolpp2.polymer.Residue"><code class="xref py py-class docutils literal notranslate"><span class="pre">Residue</span></code></a>/<a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.Chain" title="pyxmolpp2.polymer.Chain"><code class="xref py py-class docutils literal notranslate"><span class="pre">Chain</span></code></a> is alive until it’s <a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.Frame" title="pyxmolpp2.polymer.Frame"><code class="xref py py-class docutils literal notranslate"><span class="pre">Frame</span></code></a> exists. <a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.Frame" title="pyxmolpp2.polymer.Frame"><code class="xref py py-class docutils literal notranslate"><span class="pre">Frame</span></code></a> exists until python holds a reference to it.
+No frame - no game.</p>
+</div>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>40
+41
+42
+43
+44
+45
+46</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">import</span> <span class="nn">pyxmolpp2</span>
+ <span class="kn">import</span> <span class="nn">os</span>
+
+ <span class="n">pdb_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;TEST_DATA_PATH&quot;</span><span class="p">],</span> <span class="s2">&quot;pdb/rcsb/1UBQ.pdb&quot;</span><span class="p">)</span>
+ <span class="n">pdb_file</span> <span class="o">=</span> <span class="n">pyxmolpp2</span><span class="o">.</span><span class="n">pdb</span><span class="o">.</span><span class="n">PdbFile</span><span class="p">(</span><span class="n">pdb_filename</span><span class="p">)</span>
+
+ <span class="n">frame</span> <span class="o">=</span> <span class="n">pdb_file</span><span class="o">.</span><span class="n">get_frame</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>50
+51</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="c1"># print chain names of 1UBQ entry</span>
+ <span class="nb">print</span><span class="p">([</span> <span class="n">chain</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">str</span> <span class="k">for</span> <span class="n">chain</span> <span class="ow">in</span> <span class="n">frame</span><span class="o">.</span><span class="n">asChains</span> <span class="p">])</span>
+</pre></div>
+</td></tr></table></div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&#39;A&#39;, &#39;A&#39;]
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>55
+56</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="c1"># print residue names of 1UBQ entry</span>
+ <span class="nb">print</span><span class="p">([</span> <span class="n">res</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">str</span> <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">frame</span><span class="o">.</span><span class="n">asResidues</span><span class="p">])</span>
+</pre></div>
+</td></tr></table></div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[&#39;MET&#39;, &#39;GLN&#39;, &#39;ILE&#39;, &#39;PHE&#39;, &#39;VAL&#39;, &#39;LYS&#39;, &#39;THR&#39;, &#39;LEU&#39;, &#39;THR&#39;, &#39;GLY&#39;, &#39;LYS&#39;, &#39;THR&#39;, &#39;ILE&#39;, &#39;THR&#39;, &#39;LEU&#39;, &#39;GLU&#39;, &#39;VAL&#39;, &#39;GLU&#39;, &#39;PRO&#39;, &#39;SER&#39;, &#39;ASP&#39;, &#39;THR&#39;, &#39;ILE&#39;, &#39;GLU&#39;, &#39;ASN&#39;, &#39;VAL&#39;, &#39;LYS&#39;, &#39;ALA&#39;, &#39;LYS&#39;, &#39;ILE&#39;, &#39;GLN&#39;, &#39;ASP&#39;, &#39;LYS&#39;, &#39;GLU&#39;, &#39;GLY&#39;, &#39;ILE&#39;, &#39;PRO&#39;, &#39;PRO&#39;, &#39;ASP&#39;, &#39;GLN&#39;, &#39;GLN&#39;, &#39;ARG&#39;, &#39;LEU&#39;, &#39;ILE&#39;, &#39;PHE&#39;, &#39;ALA&#39;, &#39;GLY&#39;, &#39;LYS&#39;, &#39;GLN&#39;, &#39;LEU&#39;, &#39;GLU&#39;, &#39;ASP&#39;, &#39;GLY&#39;, &#39;ARG&#39;, &#39;THR&#39;, &#39;LEU&#39;, &#39;SER&#39;, &#39;ASP&#39;, &#39;TYR&#39;, &#39;ASN&#39;, &#39;ILE&#39;, &#39;GLN&#39;, &#39;LYS&#39;, &#39;GLU&#39;, &#39;SER&#39;, &#39;THR&#39;, &#39;LEU&#39;, &#39;HIS&#39;, &#39;LEU&#39;, &#39;VAL&#39;, &#39;LEU&#39;, &#39;ARG&#39;, &#39;LEU&#39;, &#39;ARG&#39;, &#39;GLY&#39;, &#39;GLY&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;, &#39;HOH&#39;]
+</pre></div>
+</div>
+<p>print info about first atom:</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">a</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">asAtoms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+ <span class="kn">from</span> <span class="nn">tabulate</span> <span class="k">import</span> <span class="n">tabulate</span>
+
+ <span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">([</span>
+     <span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">name</span><span class="p">),</span>
+     <span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">id</span><span class="p">),</span>
+     <span class="p">(</span><span class="s2">&quot;[x,y,z]&quot;</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">r</span><span class="p">),</span>
+     <span class="p">(</span><span class="s2">&quot;rId&quot;</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">rId</span><span class="p">),</span>
+     <span class="p">(</span><span class="s2">&quot;rName&quot;</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">rName</span><span class="p">),</span>
+     <span class="p">(</span><span class="s2">&quot;cName&quot;</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">cName</span><span class="p">),</span>
+ <span class="p">]))</span>
+</pre></div>
+</td></tr></table></div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>-------  --------------------------------
+name     N
+id       1
+[x,y,z]  [27.340000, 24.430000, 2.614000]
+rId      1
+rName    MET
+cName    A
+-------  --------------------------------
+</pre></div>
+</div>
+<p>we can find frame by atom</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>74</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="k">assert</span> <span class="n">a</span><span class="o">.</span><span class="n">frame</span> <span class="o">==</span> <span class="n">frame</span>
+</pre></div>
+</td></tr></table></div>
+<p>If you destroy all references to frame it will be eliminated with all it’s content</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>79
+80
+81
+82</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">asel</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">asAtoms</span>    <span class="c1"># valid as long reference to frame exists</span>
+ <span class="n">rsel</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">asResidues</span> <span class="c1"># valid as long reference to frame exists</span>
+ <span class="n">csel</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">asChains</span>   <span class="c1"># valid as long reference to frame exists</span>
+ <span class="n">a</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">asAtoms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>    <span class="c1"># valid as long reference to frame exists</span>
+</pre></div>
+</td></tr></table></div>
+<p>Let’s <cite>accidentally</cite> destroy frame, by dropping only reference:</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>86</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">frame</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>90
+91
+92
+93
+94
+95</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="k">try</span><span class="p">:</span>
+     <span class="nb">print</span><span class="p">(</span><span class="n">asel</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+ <span class="k">except</span> <span class="n">pyxmolpp2</span><span class="o">.</span><span class="n">polymer</span><span class="o">.</span><span class="n">DeadAtomSelectionAccess</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;AtomSelection error:&quot;</span><span class="p">)</span>
+     <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+     <span class="k">pass</span>
+</pre></div>
+</td></tr></table></div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>AtomSelection error:
+Dead selection access in ::operator[]
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 98
+ 99
+100
+101
+102
+103</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="k">try</span><span class="p">:</span>
+     <span class="nb">print</span><span class="p">(</span><span class="n">rsel</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+ <span class="k">except</span> <span class="n">pyxmolpp2</span><span class="o">.</span><span class="n">polymer</span><span class="o">.</span><span class="n">DeadResidueSelectionAccess</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ResidueSelection error:&quot;</span><span class="p">)</span>
+     <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+     <span class="k">pass</span>
+</pre></div>
+</td></tr></table></div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>ResidueSelection error:
+Dead selection access in ::operator[]
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>106
+107
+108
+109
+110
+111</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="k">try</span><span class="p">:</span>
+     <span class="nb">print</span><span class="p">(</span><span class="n">csel</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+ <span class="k">except</span> <span class="n">pyxmolpp2</span><span class="o">.</span><span class="n">polymer</span><span class="o">.</span><span class="n">DeadChainSelectionAccess</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ChainSelection error:&quot;</span><span class="p">)</span>
+     <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+     <span class="k">pass</span>
+</pre></div>
+</td></tr></table></div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>ChainSelection error:
+Dead selection access in ::operator[]
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>118
+119
+120
+121
+122
+123</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="k">try</span><span class="p">:</span>
+     <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+ <span class="k">except</span> <span class="ne">RuntimeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Atom access error:&quot;</span><span class="p">)</span>
+     <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+     <span class="k">pass</span>
+</pre></div>
+</td></tr></table></div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Atom access error:
+Deleted element access through reference
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.055 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-basics-fcra-py">
+<div class="sphx-glr-download docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/fc8ae6927a6fb6b4632e80590fc48a7d/FCRA.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">FCRA.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/7efa5d87d4bdab0b66dd07d74861b27e/FCRA.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">FCRA.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="torsion_angle.html" class="btn btn-neutral float-right" title="Torsion Angles" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="reorder_atoms.html" class="btn btn-neutral float-left" title="Reorder atoms/residues" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Sergei Izmailov
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

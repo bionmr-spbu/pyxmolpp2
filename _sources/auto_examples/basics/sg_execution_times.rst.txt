@@ -1,0 +1,17 @@
+
+:orphan:
+
+.. _sphx_glr_auto_examples_basics_sg_execution_times:
+
+Computation times
+=================
+**00:01.156** total execution time for **auto_examples_basics** files:
+
+- **00:00.638**: :ref:`sphx_glr_auto_examples_basics_RMSD.py` (``RMSD.py``)
+- **00:00.168**: :ref:`sphx_glr_auto_examples_basics_SASA.py` (``SASA.py``)
+- **00:00.096**: :ref:`sphx_glr_auto_examples_basics_reorder_atoms.py` (``reorder_atoms.py``)
+- **00:00.062**: :ref:`sphx_glr_auto_examples_basics_selections.py` (``selections.py``)
+- **00:00.055**: :ref:`sphx_glr_auto_examples_basics_FCRA.py` (``FCRA.py``)
+- **00:00.050**: :ref:`sphx_glr_auto_examples_basics_torsion_angle.py` (``torsion_angle.py``)
+- **00:00.047**: :ref:`sphx_glr_auto_examples_basics_array_indexing.py` (``array_indexing.py``)
+- **00:00.041**: :ref:`sphx_glr_auto_examples_basics_angles.py` (``angles.py``)

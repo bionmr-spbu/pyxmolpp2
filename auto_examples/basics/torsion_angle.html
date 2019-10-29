@@ -1,0 +1,410 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Torsion Angles &mdash; pyxmolpp2 0.10.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Selections" href="selections.html" />
+    <link rel="prev" title="Frame/Chain/Residue/Atom hierarchy" href="FCRA.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> pyxmolpp2
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.10
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Examples</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples gallery</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#read-write-pdb-files">Read/Write PDB files</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#basics">Basics</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="array_indexing.html">Numpy-style array indexing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="angles.html">AngleValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reorder_atoms.html">Reorder atoms/residues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FCRA.html">Frame/Chain/Residue/Atom hierarchy</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Torsion Angles</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#standard-torsion-angles">Standard torsion angles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#construction">Construction</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="selections.html">Selections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="RMSD.html">RMSD/RMSF calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SASA.html">Solvent Accessible Solvent Area (SASA)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../pyxmolpp2/amber.html">pyxmolpp2.amber</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyxmolpp2/crystal.html">pyxmolpp2.crystal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyxmolpp2/geometry.html">pyxmolpp2.geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyxmolpp2/pdb.html">pyxmolpp2.pdb</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyxmolpp2/polymer.html">pyxmolpp2.polymer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyxmolpp2/trajectory.html">pyxmolpp2.trajectory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyxmolpp2/trjtool.html">pyxmolpp2.trjtool</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pyxmolpp2</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Examples gallery</a> &raquo;</li>
+        
+      <li>Torsion Angles</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/auto_examples/basics/torsion_angle.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-auto-examples-basics-torsion-angle-py"><span class="std std-ref">here</span></a> to download the full example code</p>
+</div>
+<div class="sphx-glr-example-title section" id="torsion-angles">
+<span id="sphx-glr-auto-examples-basics-torsion-angle-py"></span><h1>Torsion Angles<a class="headerlink" href="#torsion-angles" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>23
+24</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">import</span> <span class="nn">pyxmolpp2</span>
+ <span class="kn">import</span> <span class="nn">os</span>
+</pre></div>
+</td></tr></table></div>
+<p>Let’s create a frame to work with</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>29
+30
+31
+32</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">pdb_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;TEST_DATA_PATH&quot;</span><span class="p">],</span> <span class="s2">&quot;pdb/rcsb/1UBQ.pdb&quot;</span><span class="p">)</span>
+ <span class="n">pdb_file</span> <span class="o">=</span> <span class="n">pyxmolpp2</span><span class="o">.</span><span class="n">pdb</span><span class="o">.</span><span class="n">PdbFile</span><span class="p">(</span><span class="n">pdb_filename</span><span class="p">)</span>
+
+ <span class="n">frame</span> <span class="o">=</span> <span class="n">pdb_file</span><span class="o">.</span><span class="n">get_frame</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<div class="section" id="standard-torsion-angles">
+<h2>Standard torsion angles<a class="headerlink" href="#standard-torsion-angles" title="Permalink to this headline">¶</a></h2>
+<p>For standard protein residues angles can be constructed using <cite>TorsionAngleFactory</cite>:</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>40
+41
+42
+43
+44
+45
+46
+47
+48</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">pyxmolpp2.polymer</span> <span class="k">import</span> <span class="n">TorsionAngleFactory</span>
+ <span class="kn">from</span> <span class="nn">pyxmolpp2.geometry</span> <span class="k">import</span> <span class="n">Degrees</span>
+
+ <span class="n">residue48</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">asChains</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">48</span><span class="p">]</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">residue48</span><span class="p">)</span>
+
+ <span class="n">psi_48</span> <span class="o">=</span> <span class="n">TorsionAngleFactory</span><span class="o">.</span><span class="n">psi</span><span class="p">(</span><span class="n">residue48</span><span class="p">)</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">psi_48</span><span class="p">)</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">psi_48</span><span class="o">.</span><span class="n">value</span><span class="p">()</span><span class="o">.</span><span class="n">degrees</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;pyxmolpp2.polymer.Residue id=48 name=&quot;LYS&quot; at 0x00000000020834B0&gt;
+&lt;pyxmolpp2.polymer.TorsionAngle object at 0x2b64cf0fd768&gt;
+142.71298452616637
+</pre></div>
+</div>
+<p>Note: Factory may return <code class="docutils literal notranslate"><span class="pre">None</span></code> if such angle does not exist:</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>52</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="nb">print</span><span class="p">(</span><span class="n">TorsionAngleFactory</span><span class="o">.</span><span class="n">omega</span><span class="p">(</span><span class="n">frame</span><span class="o">.</span><span class="n">asResidues</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+</pre></div>
+</td></tr></table></div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>None
+</pre></div>
+</div>
+<p>Torsion angle allows to set a new one:</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>57
+58
+59</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="c1"># All residues 49-76 are affected by this rotation</span>
+ <span class="n">psi_48</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">Degrees</span><span class="p">(</span><span class="mi">150</span><span class="p">))</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">psi_48</span><span class="o">.</span><span class="n">value</span><span class="p">()</span><span class="o">.</span><span class="n">degrees</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>149.99999999999983
+</pre></div>
+</div>
+</div>
+<div class="section" id="construction">
+<h2>Construction<a class="headerlink" href="#construction" title="Permalink to this headline">¶</a></h2>
+<dl class="simple">
+<dt>Torsion angle constructor allow two forms:</dt><dd><ol class="arabic simple">
+<li><p>Read-only torsion angle</p></li>
+<li><p>Read-write torsion angle</p></li>
+</ol>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">pyxmolpp2.polymer</span> <span class="k">import</span> <span class="n">TorsionAngle</span><span class="p">,</span> <span class="n">AtomName</span><span class="p">,</span> <span class="n">Atom</span>
+
+ <span class="n">r1</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">asResidues</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+ <span class="n">r2</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">asResidues</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+ <span class="c1"># Let&#39;s create a read-only phi of residue 2</span>
+ <span class="n">phi_2_ro</span> <span class="o">=</span> <span class="n">TorsionAngle</span><span class="p">(</span><span class="n">r1</span><span class="p">[</span><span class="n">AtomName</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">)],</span>
+                         <span class="n">r2</span><span class="p">[</span><span class="n">AtomName</span><span class="p">(</span><span class="s2">&quot;N&quot;</span><span class="p">)],</span>
+                         <span class="n">r2</span><span class="p">[</span><span class="n">AtomName</span><span class="p">(</span><span class="s2">&quot;CA&quot;</span><span class="p">)],</span>
+                         <span class="n">r2</span><span class="p">[</span><span class="n">AtomName</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">)],</span>
+                         <span class="p">)</span>
+
+ <span class="c1"># Check against factory angle:</span>
+ <span class="k">assert</span> <span class="n">phi_2_ro</span><span class="o">.</span><span class="n">value</span><span class="p">()</span><span class="o">.</span><span class="n">degrees</span> <span class="o">==</span> <span class="n">TorsionAngleFactory</span><span class="o">.</span><span class="n">phi</span><span class="p">(</span><span class="n">r2</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">()</span><span class="o">.</span><span class="n">degrees</span>
+</pre></div>
+</td></tr></table></div>
+<p>Attempt to set TorsionAngle will lead to <code class="docutils literal notranslate"><span class="pre">RuntimeError</span></code>:</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>85
+86
+87
+88</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="k">try</span><span class="p">:</span>
+     <span class="n">phi_2_ro</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">Degrees</span><span class="p">(</span><span class="o">-</span><span class="mi">130</span><span class="p">))</span>
+ <span class="k">except</span> <span class="ne">RuntimeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+     <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>TorsionAngle: affected AtomSelection are not set
+</pre></div>
+</div>
+<p>We need a helper function which returns a selection of affected atoms
+by our torsion angle</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="k">def</span> <span class="nf">affected_phi_atoms</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">Atom</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">Atom</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="n">Atom</span><span class="p">,</span> <span class="n">d</span><span class="p">:</span> <span class="n">Atom</span><span class="p">):</span>
+     <span class="kn">from</span> <span class="nn">pyxmolpp2.polymer</span> <span class="k">import</span> <span class="n">rId</span>
+     <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">chain</span><span class="o">.</span><span class="n">asResidues</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">rId</span> <span class="o">&gt;</span> <span class="n">a</span><span class="o">.</span><span class="n">rId</span><span class="p">)</span><span class="o">.</span><span class="n">asAtoms</span>
+
+
+ <span class="n">phi_2_rw</span> <span class="o">=</span> <span class="n">TorsionAngle</span><span class="p">(</span><span class="n">r1</span><span class="p">[</span><span class="n">AtomName</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">)],</span>
+                         <span class="n">r2</span><span class="p">[</span><span class="n">AtomName</span><span class="p">(</span><span class="s2">&quot;N&quot;</span><span class="p">)],</span>
+                         <span class="n">r2</span><span class="p">[</span><span class="n">AtomName</span><span class="p">(</span><span class="s2">&quot;CA&quot;</span><span class="p">)],</span>
+                         <span class="n">r2</span><span class="p">[</span><span class="n">AtomName</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">)],</span>
+                         <span class="n">affected_phi_atoms</span>
+                         <span class="p">)</span>
+
+ <span class="n">phi_2_rw</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">Degrees</span><span class="p">(</span><span class="o">-</span><span class="mi">130</span><span class="p">))</span>
+
+ <span class="nb">print</span><span class="p">(</span><span class="n">phi_2_ro</span><span class="o">.</span><span class="n">value</span><span class="p">()</span><span class="o">.</span><span class="n">degrees</span><span class="p">)</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">phi_2_rw</span><span class="o">.</span><span class="n">value</span><span class="p">()</span><span class="o">.</span><span class="n">degrees</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>-130.0000000000001
+-130.0000000000001
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.050 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-basics-torsion-angle-py">
+<div class="sphx-glr-download docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/99e968b8b53bedd666be9a14ebab7fac/torsion_angle.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">torsion_angle.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/65b95093e4bd1396f0f53ef0c0e14543/torsion_angle.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">torsion_angle.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="selections.html" class="btn btn-neutral float-right" title="Selections" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="FCRA.html" class="btn btn-neutral float-left" title="Frame/Chain/Residue/Atom hierarchy" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Sergei Izmailov
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

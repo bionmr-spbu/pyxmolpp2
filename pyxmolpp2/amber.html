@@ -1,0 +1,296 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pyxmolpp2.amber &mdash; pyxmolpp2 0.10.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="pyxmolpp2.crystal" href="crystal.html" />
+    <link rel="prev" title="Solvent Accessible Solvent Area (SASA)" href="../auto_examples/basics/SASA.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> pyxmolpp2
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.10
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../auto_examples/index.html">Examples gallery</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">pyxmolpp2.amber</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crystal.html">pyxmolpp2.crystal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geometry.html">pyxmolpp2.geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pdb.html">pyxmolpp2.pdb</a></li>
+<li class="toctree-l1"><a class="reference internal" href="polymer.html">pyxmolpp2.polymer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trajectory.html">pyxmolpp2.trajectory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trjtool.html">pyxmolpp2.trjtool</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">pyxmolpp2</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>pyxmolpp2.amber</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/pyxmolpp2/amber.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-pyxmolpp2.amber">
+<span id="pyxmolpp2-amber"></span><h1>pyxmolpp2.amber<a class="headerlink" href="#module-pyxmolpp2.amber" title="Permalink to this headline">¶</a></h1>
+<p>pyxmolpp2.amber module</p>
+<dl class="class">
+<dt id="pyxmolpp2.amber.NetCDFTrajectoryFile">
+<em class="property">class </em><code class="sig-prename descclassname">pyxmolpp2.amber.</code><code class="sig-name descname">NetCDFTrajectoryFile</code><a class="headerlink" href="#pyxmolpp2.amber.NetCDFTrajectoryFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="trajectory.html#pyxmolpp2.trajectory.TrajectoryPortion" title="pyxmolpp2.trajectory.TrajectoryPortion"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyxmolpp2.trajectory.TrajectoryPortion</span></code></a></p>
+<p>Represents <cite>.nc</cite> file on disk</p>
+<dl class="method">
+<dt id="pyxmolpp2.amber.NetCDFTrajectoryFile.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">filename</em><span class="sig-paren">)</span><a class="headerlink" href="#pyxmolpp2.amber.NetCDFTrajectoryFile.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – not documented yet</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyxmolpp2.amber.NetCDFTrajectoryFile.close">
+<code class="sig-name descname">close</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#pyxmolpp2.amber.NetCDFTrajectoryFile.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Release file handle</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyxmolpp2.amber.NetCDFTrajectoryFile.match">
+<code class="sig-name descname">match</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">atoms</em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#pyxmolpp2.amber.NetCDFTrajectoryFile.match" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks atom names, residue names and residue ids to match reference_atoms</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>atoms</strong> (<a class="reference internal" href="polymer.html#pyxmolpp2.polymer.AtomSelection" title="pyxmolpp2.polymer.AtomSelection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AtomSelection</span></code></a>) – not documented yet</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyxmolpp2.amber.NetCDFTrajectoryFile.n_atoms_per_frame">
+<em class="property">property </em><code class="sig-name descname">n_atoms_per_frame</code><a class="headerlink" href="#pyxmolpp2.amber.NetCDFTrajectoryFile.n_atoms_per_frame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of atoms per frame</p>
+<dl class="field-list simple">
+<dt class="field-odd">Getter</dt>
+<dd class="field-odd"><p>returns <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyxmolpp2.amber.NetCDFTrajectoryFile.n_frames">
+<em class="property">property </em><code class="sig-name descname">n_frames</code><a class="headerlink" href="#pyxmolpp2.amber.NetCDFTrajectoryFile.n_frames" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of frames in PDB file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Getter</dt>
+<dd class="field-odd"><p>returns <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyxmolpp2.amber.NetCDFTrajectoryFile.set_coordinates">
+<code class="sig-name descname">set_coordinates</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">arg0</em>, <em class="sig-param">arg1</em>, <em class="sig-param">arg2</em><span class="sig-paren">)</span><a class="headerlink" href="#pyxmolpp2.amber.NetCDFTrajectoryFile.set_coordinates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set atoms coordinates from frame #frame_index</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>arg0</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – not documented yet</p></li>
+<li><p><strong>arg1</strong> (<a class="reference internal" href="polymer.html#pyxmolpp2.polymer.AtomSelection" title="pyxmolpp2.polymer.AtomSelection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AtomSelection</span></code></a>) – not documented yet</p></li>
+<li><p><strong>arg2</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">List[int]</span></code>) – not documented yet</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="crystal.html" class="btn btn-neutral float-right" title="pyxmolpp2.crystal" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../auto_examples/basics/SASA.html" class="btn btn-neutral float-left" title="Solvent Accessible Solvent Area (SASA)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Sergei Izmailov
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

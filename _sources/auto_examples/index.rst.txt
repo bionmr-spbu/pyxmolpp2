@@ -1,0 +1,311 @@
+:orphan:
+
+
+
+.. _sphx_glr_auto_examples:
+
+
+
+Examples gallery
+================
+
+Here you can find typical usages of the library
+
+.. raw:: html
+
+    <div style='clear:both'></div>
+
+
+
+.. _sphx_glr_auto_examples_PDB:
+
+
+
+Read/Write PDB files
+--------------------
+
+
+
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="If your PDB is arbitrary formatted it might be successfully read but the result might be unexpe...">
+
+.. only:: html
+
+    .. figure:: /auto_examples/PDB/images/thumb/sphx_glr_read_pdb_errors_thumb.png
+
+        :ref:`sphx_glr_auto_examples_PDB_read_pdb_errors.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/PDB/read_pdb_errors
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Write multiple frames to pdb">
+
+.. only:: html
+
+    .. figure:: /auto_examples/PDB/images/thumb/sphx_glr_write_multiple_frames_to_pdb_thumb.png
+
+        :ref:`sphx_glr_auto_examples_PDB_write_multiple_frames_to_pdb.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/PDB/write_multiple_frames_to_pdb
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Standard PDB io">
+
+.. only:: html
+
+    .. figure:: /auto_examples/PDB/images/thumb/sphx_glr_read_write_standard_pdb_thumb.png
+
+        :ref:`sphx_glr_auto_examples_PDB_read_write_standard_pdb.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/PDB/read_write_standard_pdb
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="pyxmolpp2 supports reading/writing non-standard PDB files. To read such file you need to specif...">
+
+.. only:: html
+
+    .. figure:: /auto_examples/PDB/images/thumb/sphx_glr_read_write_non_standard_pdb_thumb.png
+
+        :ref:`sphx_glr_auto_examples_PDB_read_write_non_standard_pdb.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/PDB/read_write_non_standard_pdb
+.. raw:: html
+
+    <div style='clear:both'></div>
+
+
+
+.. _sphx_glr_auto_examples_basics:
+
+
+Basics
+------
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Syntax shortcuts are available for construction index by predicate from AtomSeleciton/ResidueSe...">
+
+.. only:: html
+
+    .. figure:: /auto_examples/basics/images/thumb/sphx_glr_array_indexing_thumb.png
+
+        :ref:`sphx_glr_auto_examples_basics_array_indexing.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/basics/array_indexing
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Protect yourself from missing 2pi/180.0">
+
+.. only:: html
+
+    .. figure:: /auto_examples/basics/images/thumb/sphx_glr_angles_thumb.png
+
+        :ref:`sphx_glr_auto_examples_basics_angles.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/basics/angles
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example we will see how to reorder atoms/residues/chains">
+
+.. only:: html
+
+    .. figure:: /auto_examples/basics/images/thumb/sphx_glr_reorder_atoms_thumb.png
+
+        :ref:`sphx_glr_auto_examples_basics_reorder_atoms.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/basics/reorder_atoms
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip=" The pyxmolpp2 library implements |Frame|/|Chain|/|Residue|/|Atom| hierarchy to represent a mol...">
+
+.. only:: html
+
+    .. figure:: /auto_examples/basics/images/thumb/sphx_glr_FCRA_thumb.png
+
+        :ref:`sphx_glr_auto_examples_basics_FCRA.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/basics/FCRA
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Torsion Angles">
+
+.. only:: html
+
+    .. figure:: /auto_examples/basics/images/thumb/sphx_glr_torsion_angle_thumb.png
+
+        :ref:`sphx_glr_auto_examples_basics_torsion_angle.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/basics/torsion_angle
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="*Selection* is ordered set of elements in pyxmolpp2. Order is defined as follows">
+
+.. only:: html
+
+    .. figure:: /auto_examples/basics/images/thumb/sphx_glr_selections_thumb.png
+
+        :ref:`sphx_glr_auto_examples_basics_selections.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/basics/selections
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Calculate RMSD/RMSF">
+
+.. only:: html
+
+    .. figure:: /auto_examples/basics/images/thumb/sphx_glr_RMSD_thumb.png
+
+        :ref:`sphx_glr_auto_examples_basics_RMSD.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/basics/RMSD
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="ASA is important measure of protein molecule.">
+
+.. only:: html
+
+    .. figure:: /auto_examples/basics/images/thumb/sphx_glr_SASA_thumb.png
+
+        :ref:`sphx_glr_auto_examples_basics_SASA.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/basics/SASA
+.. raw:: html
+
+    <div style='clear:both'></div>
+
+
+
+.. only :: html
+
+ .. container:: sphx-glr-footer
+    :class: sphx-glr-footer-gallery
+
+
+  .. container:: sphx-glr-download
+
+    :download:`Download all examples in Python source code: auto_examples_python.zip <//home/travis/build/sizmailov/pyxmolpp2/docs/source/auto_examples/auto_examples_python.zip>`
+
+
+
+  .. container:: sphx-glr-download
+
+    :download:`Download all examples in Jupyter notebooks: auto_examples_jupyter.zip <//home/travis/build/sizmailov/pyxmolpp2/docs/source/auto_examples/auto_examples_jupyter.zip>`
+
+
+.. only:: html
+
+ .. rst-class:: sphx-glr-signature
+
+    `Gallery generated by Sphinx-Gallery <https://sphinx-gallery.github.io>`_

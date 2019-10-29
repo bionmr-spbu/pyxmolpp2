@@ -1,0 +1,953 @@
+.. note::
+    :class: sphx-glr-download-link-note
+
+    Click :ref:`here <sphx_glr_download_auto_examples_basics_SASA.py>` to download the full example code
+.. rst-class:: sphx-glr-example-title
+
+.. _sphx_glr_auto_examples_basics_SASA.py:
+
+
+
+.. _examples.sasa_calc:
+
+Solvent Accessible Solvent Area (SASA)
+--------------------------------------
+
+ASA is important measure of protein molecule.
+
+
+
+.. code-block:: default
+   :lineno-start: 12
+
+
+    import pyxmolpp2
+    import os
+    import numpy as np
+    from timeit import default_timer as timer
+
+
+
+
+
+
+
+Let's create a frame to work with
+
+
+.. code-block:: default
+   :lineno-start: 20
+
+
+    pdb_filename = os.path.join(os.environ["TEST_DATA_PATH"], "pdb/rcsb/1UBQ.pdb")
+    pdb_file = pyxmolpp2.pdb.PdbFile(pdb_filename)
+    frame = pdb_file.get_frame()
+
+
+
+
+
+
+
+We need to set VDW radii for all atoms
+Let's do it according to the next table
+
+
+.. code-block:: default
+   :lineno-start: 28
+
+
+    vdw_table = {
+        "C": 1.70,
+        "O": 1.52,
+        "S": 1.80,
+        "N": 1.55,
+        "H": 1.2,
+    }
+
+    atoms = frame.asAtoms
+
+    # First letter of atom name determinate it's element
+    vdw_radii = np.array([vdw_table[a.name.str[0]] for a in atoms])
+
+    # Solvent radius for water is usually 1.4 A
+    solvent_radius = 1.4
+
+    # Measure time spent on SASA calculation
+    t_start = timer()
+    sasa_per_atom = pyxmolpp2.geometry.calc_sasa(atoms.toCoords,
+                                                 vdw_radii,
+                                                 solvent_radius,
+                                                 n_samples=20
+                                                 )
+    t_end = timer()
+
+    # Print all sasa values
+    print("Per-atom SASA")
+    for sasa, a in zip(sasa_per_atom, atoms):
+        print("{:3d}-{:3s}.{:4s} {:7.2f}".format(a.rId.serial, a.rName.str, a.name.str, sasa))
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+    Per-atom SASA
+      1-MET.N       0.21
+      1-MET.CA      5.09
+      1-MET.C       0.00
+      1-MET.O      -0.00
+      1-MET.CB      3.03
+      1-MET.CG      0.00
+      1-MET.SD      0.07
+      1-MET.CE      0.00
+      2-GLN.N       1.08
+      2-GLN.CA      0.00
+      2-GLN.C       0.00
+      2-GLN.O      -0.00
+      2-GLN.CB      6.13
+      2-GLN.CG      0.50
+      2-GLN.CD      1.93
+      2-GLN.OE1    35.78
+      2-GLN.NE2    25.92
+      3-ILE.N      -0.00
+      3-ILE.CA      0.00
+      3-ILE.C       0.00
+      3-ILE.O      -0.00
+      3-ILE.CB      0.00
+      3-ILE.CG1     0.00
+      3-ILE.CG2     0.00
+      3-ILE.CD1     0.00
+      4-PHE.N      -0.00
+      4-PHE.CA      0.00
+      4-PHE.C       0.00
+      4-PHE.O      -0.00
+      4-PHE.CB      0.02
+      4-PHE.CG      2.43
+      4-PHE.CD1     3.21
+      4-PHE.CD2     5.43
+      4-PHE.CE1     8.99
+      4-PHE.CE2    16.03
+      4-PHE.CZ     18.01
+      5-VAL.N      -0.00
+      5-VAL.CA      0.00
+      5-VAL.C       0.00
+      5-VAL.O      -0.00
+      5-VAL.CB      0.00
+      5-VAL.CG1     0.78
+      5-VAL.CG2     0.00
+      6-LYS.N      -0.00
+      6-LYS.CA      0.00
+      6-LYS.C       0.00
+      6-LYS.O       1.62
+      6-LYS.CB      0.00
+      6-LYS.CG      0.88
+      6-LYS.CD      0.46
+      6-LYS.CE     20.92
+      6-LYS.NZ     39.75
+      7-THR.N      -0.00
+      7-THR.CA      0.00
+      7-THR.C       0.12
+      7-THR.O       1.75
+      7-THR.CB      4.14
+      7-THR.OG1     1.39
+      7-THR.CG2     7.78
+      8-LEU.N      -0.00
+      8-LEU.CA      0.00
+      8-LEU.C       0.21
+      8-LEU.O      15.03
+      8-LEU.CB     12.43
+      8-LEU.CG      0.00
+      8-LEU.CD1    40.34
+      8-LEU.CD2    32.04
+      9-THR.N      -0.00
+      9-THR.CA      4.51
+      9-THR.C       0.06
+      9-THR.O      20.60
+      9-THR.CB      9.56
+      9-THR.OG1     4.87
+      9-THR.CG2    40.17
+     10-GLY.N      -0.00
+     10-GLY.CA      8.70
+     10-GLY.C       0.13
+     10-GLY.O      31.41
+     11-LYS.N      -0.00
+     11-LYS.CA      1.31
+     11-LYS.C       0.00
+     11-LYS.O      -0.00
+     11-LYS.CB      0.99
+     11-LYS.CG      3.38
+     11-LYS.CD     11.43
+     11-LYS.CE     27.20
+     11-LYS.NZ     15.64
+     12-THR.N      -0.00
+     12-THR.CA      0.00
+     12-THR.C       0.00
+     12-THR.O       4.11
+     12-THR.CB      7.75
+     12-THR.OG1     8.15
+     12-THR.CG2     4.44
+     13-ILE.N      -0.00
+     13-ILE.CA      1.46
+     13-ILE.C       0.00
+     13-ILE.O      -0.00
+     13-ILE.CB      1.48
+     13-ILE.CG1     0.00
+     13-ILE.CG2     3.09
+     13-ILE.CD1     0.38
+     14-THR.N       1.79
+     14-THR.CA      0.00
+     14-THR.C       0.79
+     14-THR.O       2.23
+     14-THR.CB      0.60
+     14-THR.OG1    20.73
+     14-THR.CG2    13.77
+     15-LEU.N      -0.00
+     15-LEU.CA      0.00
+     15-LEU.C       1.02
+     15-LEU.O       0.34
+     15-LEU.CB      0.00
+     15-LEU.CG      0.00
+     15-LEU.CD1     0.32
+     15-LEU.CD2     0.00
+     16-GLU.N      -0.00
+     16-GLU.CA      0.00
+     16-GLU.C       1.66
+     16-GLU.O       2.43
+     16-GLU.CB      8.72
+     16-GLU.CG      8.90
+     16-GLU.CD      5.40
+     16-GLU.OE1    43.79
+     16-GLU.OE2    43.74
+     17-VAL.N       0.07
+     17-VAL.CA      0.11
+     17-VAL.C       0.87
+     17-VAL.O       0.48
+     17-VAL.CB      0.00
+     17-VAL.CG1     0.00
+     17-VAL.CG2     0.00
+     18-GLU.N      -0.00
+     18-GLU.CA      0.00
+     18-GLU.C       0.00
+     18-GLU.O      -0.00
+     18-GLU.CB      0.00
+     18-GLU.CG      9.36
+     18-GLU.CD      3.18
+     18-GLU.OE1     9.98
+     18-GLU.OE2    18.74
+     19-PRO.N      -0.00
+     19-PRO.CA      0.00
+     19-PRO.C       0.23
+     19-PRO.O      -0.00
+     19-PRO.CB     10.28
+     19-PRO.CG      8.46
+     19-PRO.CD      2.60
+     20-SER.N       1.05
+     20-SER.CA      3.31
+     20-SER.C       0.00
+     20-SER.O       3.18
+     20-SER.CB     13.28
+     20-SER.OG      1.35
+     21-ASP.N      -0.00
+     21-ASP.CA      1.34
+     21-ASP.C       0.00
+     21-ASP.O      -0.00
+     21-ASP.CB      0.00
+     21-ASP.CG      0.00
+     21-ASP.OD1    11.21
+     21-ASP.OD2    -0.00
+     22-THR.N       1.50
+     22-THR.CA      0.00
+     22-THR.C       0.00
+     22-THR.O      -0.00
+     22-THR.CB      0.00
+     22-THR.OG1     8.30
+     22-THR.CG2    27.63
+     23-ILE.N      -0.00
+     23-ILE.CA      0.00
+     23-ILE.C       0.00
+     23-ILE.O      -0.00
+     23-ILE.CB      0.00
+     23-ILE.CG1     0.00
+     23-ILE.CG2     0.00
+     23-ILE.CD1     0.41
+     24-GLU.N      -0.00
+     24-GLU.CA      0.00
+     24-GLU.C       0.27
+     24-GLU.O       5.11
+     24-GLU.CB      0.00
+     24-GLU.CG     14.50
+     24-GLU.CD      5.69
+     24-GLU.OE1    39.44
+     24-GLU.OE2    36.01
+     25-ASN.N       0.50
+     25-ASN.CA      3.67
+     25-ASN.C       0.00
+     25-ASN.O      -0.00
+     25-ASN.CB      8.78
+     25-ASN.CG      4.70
+     25-ASN.OD1    21.61
+     25-ASN.ND2     3.61
+     26-VAL.N      -0.00
+     26-VAL.CA      0.00
+     26-VAL.C       0.00
+     26-VAL.O      -0.00
+     26-VAL.CB      0.00
+     26-VAL.CG1     0.31
+     26-VAL.CG2     0.00
+     27-LYS.N      -0.00
+     27-LYS.CA      0.00
+     27-LYS.C       0.00
+     27-LYS.O      -0.00
+     27-LYS.CB      0.03
+     27-LYS.CG      0.00
+     27-LYS.CD      0.00
+     27-LYS.CE      0.00
+     27-LYS.NZ      4.00
+     28-ALA.N       0.01
+     28-ALA.CA      0.00
+     28-ALA.C       0.00
+     28-ALA.O      -0.00
+     28-ALA.CB      9.31
+     29-LYS.N      -0.00
+     29-LYS.CA      2.26
+     29-LYS.C       0.00
+     29-LYS.O       0.29
+     29-LYS.CB      3.63
+     29-LYS.CG      3.79
+     29-LYS.CD      0.00
+     29-LYS.CE      5.12
+     29-LYS.NZ     21.65
+     30-ILE.N      -0.00
+     30-ILE.CA      0.00
+     30-ILE.C       0.00
+     30-ILE.O      -0.00
+     30-ILE.CB      0.00
+     30-ILE.CG1     0.00
+     30-ILE.CG2     1.58
+     30-ILE.CD1     0.00
+     31-GLN.N      -0.00
+     31-GLN.CA      0.00
+     31-GLN.C       0.00
+     31-GLN.O       5.99
+     31-GLN.CB      0.00
+     31-GLN.CG      5.07
+     31-GLN.CD      5.04
+     31-GLN.OE1    15.24
+     31-GLN.NE2    12.77
+     32-ASP.N      -0.00
+     32-ASP.CA      2.02
+     32-ASP.C       0.00
+     32-ASP.O      28.89
+     32-ASP.CB      2.34
+     32-ASP.CG      2.21
+     32-ASP.OD1    34.91
+     32-ASP.OD2    37.34
+     33-LYS.N      -0.00
+     33-LYS.CA      2.21
+     33-LYS.C       0.28
+     33-LYS.O      17.91
+     33-LYS.CB      6.19
+     33-LYS.CG      0.00
+     33-LYS.CD      2.41
+     33-LYS.CE      2.24
+     33-LYS.NZ     37.24
+     34-GLU.N      -0.00
+     34-GLU.CA      0.00
+     34-GLU.C       3.49
+     34-GLU.O       8.14
+     34-GLU.CB      0.46
+     34-GLU.CG      1.78
+     34-GLU.CD      0.09
+     34-GLU.OE1    10.89
+     34-GLU.OE2     9.07
+     35-GLY.N       1.65
+     35-GLY.CA     18.29
+     35-GLY.C       1.92
+     35-GLY.O      13.70
+     36-ILE.N      -0.00
+     36-ILE.CA      1.45
+     36-ILE.C       0.00
+     36-ILE.O      -0.00
+     36-ILE.CB      0.00
+     36-ILE.CG1    13.60
+     36-ILE.CG2     0.57
+     36-ILE.CD1    15.27
+     37-PRO.N      -0.00
+     37-PRO.CA      0.00
+     37-PRO.C       0.00
+     37-PRO.O      -0.00
+     37-PRO.CB      4.82
+     37-PRO.CG     14.07
+     37-PRO.CD      7.53
+     38-PRO.N      -0.00
+     38-PRO.CA      0.00
+     38-PRO.C       0.00
+     38-PRO.O      -0.00
+     38-PRO.CB      7.28
+     38-PRO.CG     11.33
+     38-PRO.CD      4.08
+     39-ASP.N       0.35
+     39-ASP.CA      3.18
+     39-ASP.C       0.00
+     39-ASP.O       3.01
+     39-ASP.CB      5.25
+     39-ASP.CG      3.06
+     39-ASP.OD1     7.01
+     39-ASP.OD2    23.11
+     40-GLN.N      -0.00
+     40-GLN.CA      0.00
+     40-GLN.C       0.00
+     40-GLN.O      -0.00
+     40-GLN.CB      0.00
+     40-GLN.CG      0.94
+     40-GLN.CD      0.00
+     40-GLN.OE1    33.42
+     40-GLN.NE2    11.53
+     41-GLN.N      -0.00
+     41-GLN.CA      0.00
+     41-GLN.C       0.00
+     41-GLN.O      -0.00
+     41-GLN.CB      0.00
+     41-GLN.CG      0.00
+     41-GLN.CD      0.00
+     41-GLN.OE1    -0.00
+     41-GLN.NE2    -0.00
+     42-ARG.N      -0.00
+     42-ARG.CA      0.00
+     42-ARG.C       0.00
+     42-ARG.O      -0.00
+     42-ARG.CB      0.22
+     42-ARG.CG      0.00
+     42-ARG.CD     14.99
+     42-ARG.NE      3.15
+     42-ARG.CZ      5.90
+     42-ARG.NH1    22.63
+     42-ARG.NH2    41.34
+     43-LEU.N      -0.00
+     43-LEU.CA      0.00
+     43-LEU.C       0.00
+     43-LEU.O      -0.00
+     43-LEU.CB      0.00
+     43-LEU.CG      0.00
+     43-LEU.CD1     0.17
+     43-LEU.CD2     0.00
+     44-ILE.N      -0.00
+     44-ILE.CA      0.00
+     44-ILE.C       0.00
+     44-ILE.O      -0.00
+     44-ILE.CB      0.31
+     44-ILE.CG1     4.48
+     44-ILE.CG2    15.71
+     44-ILE.CD1     2.78
+     45-PHE.N      -0.00
+     45-PHE.CA      0.00
+     45-PHE.C       0.00
+     45-PHE.O       0.03
+     45-PHE.CB      0.00
+     45-PHE.CG      0.00
+     45-PHE.CD1     0.00
+     45-PHE.CD2     0.00
+     45-PHE.CE1     5.68
+     45-PHE.CE2     0.06
+     45-PHE.CZ      3.90
+     46-ALA.N      -0.00
+     46-ALA.CA      6.06
+     46-ALA.C       4.85
+     46-ALA.O      16.26
+     46-ALA.CB     23.08
+     47-GLY.N       0.83
+     47-GLY.CA     22.03
+     47-GLY.C       0.74
+     47-GLY.O      41.54
+     48-LYS.N      -0.00
+     48-LYS.CA      3.66
+     48-LYS.C       0.38
+     48-LYS.O      -0.00
+     48-LYS.CB      4.96
+     48-LYS.CG     15.85
+     48-LYS.CD     18.50
+     48-LYS.CE      4.76
+     48-LYS.NZ     32.84
+     49-GLN.N       9.20
+     49-GLN.CA      0.00
+     49-GLN.C       0.00
+     49-GLN.O       9.45
+     49-GLN.CB      7.03
+     49-GLN.CG      0.05
+     49-GLN.CD      0.00
+     49-GLN.OE1    26.85
+     49-GLN.NE2    19.45
+     50-LEU.N      -0.00
+     50-LEU.CA      0.00
+     50-LEU.C       0.00
+     50-LEU.O       5.43
+     50-LEU.CB      0.00
+     50-LEU.CG      0.00
+     50-LEU.CD1     0.00
+     50-LEU.CD2     0.02
+     51-GLU.N      -0.00
+     51-GLU.CA      5.04
+     51-GLU.C       0.00
+     51-GLU.O      -0.00
+     51-GLU.CB      0.99
+     51-GLU.CG      2.98
+     51-GLU.CD      6.46
+     51-GLU.OE1    45.58
+     51-GLU.OE2    13.10
+     52-ASP.N       2.82
+     52-ASP.CA      0.00
+     52-ASP.C       0.00
+     52-ASP.O      -0.00
+     52-ASP.CB      9.45
+     52-ASP.CG      4.26
+     52-ASP.OD1    20.02
+     52-ASP.OD2     0.64
+     53-GLY.N       0.57
+     53-GLY.CA      6.35
+     53-GLY.C       0.00
+     53-GLY.O       4.78
+     54-ARG.N      -0.00
+     54-ARG.CA      0.00
+     54-ARG.C       0.00
+     54-ARG.O      -0.00
+     54-ARG.CB      0.00
+     54-ARG.CG      1.93
+     54-ARG.CD     20.08
+     54-ARG.NE      8.64
+     54-ARG.CZ      5.98
+     54-ARG.NH1    32.02
+     54-ARG.NH2    40.65
+     55-THR.N      -0.00
+     55-THR.CA      0.00
+     55-THR.C       0.00
+     55-THR.O      -0.00
+     55-THR.CB      0.00
+     55-THR.OG1     1.44
+     55-THR.CG2    18.09
+     56-LEU.N      -0.00
+     56-LEU.CA      0.00
+     56-LEU.C       0.00
+     56-LEU.O      -0.00
+     56-LEU.CB      0.00
+     56-LEU.CG      0.00
+     56-LEU.CD1     0.00
+     56-LEU.CD2     0.08
+     57-SER.N      -0.00
+     57-SER.CA      0.01
+     57-SER.C       0.00
+     57-SER.O      16.37
+     57-SER.CB     17.67
+     57-SER.OG      8.65
+     58-ASP.N      -0.00
+     58-ASP.CA      2.57
+     58-ASP.C       0.04
+     58-ASP.O      37.41
+     58-ASP.CB      6.99
+     58-ASP.CG      3.89
+     58-ASP.OD1     4.52
+     58-ASP.OD2    24.33
+     59-TYR.N      -0.00
+     59-TYR.CA      1.58
+     59-TYR.C       1.35
+     59-TYR.O       0.30
+     59-TYR.CB      0.00
+     59-TYR.CG      0.00
+     59-TYR.CD1     0.00
+     59-TYR.CD2     3.89
+     59-TYR.CE1     0.00
+     59-TYR.CE2    13.62
+     59-TYR.CZ      1.65
+     59-TYR.OH      3.62
+     60-ASN.N       0.04
+     60-ASN.CA      0.05
+     60-ASN.C       0.00
+     60-ASN.O       0.13
+     60-ASN.CB     17.67
+     60-ASN.CG      3.90
+     60-ASN.OD1    38.22
+     60-ASN.ND2     7.18
+     61-ILE.N      -0.00
+     61-ILE.CA      0.00
+     61-ILE.C       0.00
+     61-ILE.O      -0.00
+     61-ILE.CB      0.00
+     61-ILE.CG1     0.00
+     61-ILE.CG2     0.00
+     61-ILE.CD1     0.00
+     62-GLN.N      -0.00
+     62-GLN.CA      0.00
+     62-GLN.C       0.00
+     62-GLN.O      -0.00
+     62-GLN.CB      0.00
+     62-GLN.CG      4.58
+     62-GLN.CD      4.54
+     62-GLN.OE1    38.81
+     62-GLN.NE2    21.11
+     63-LYS.N      -0.00
+     63-LYS.CA      0.00
+     63-LYS.C       0.00
+     63-LYS.O       9.71
+     63-LYS.CB      0.90
+     63-LYS.CG      1.86
+     63-LYS.CD     10.12
+     63-LYS.CE     36.77
+     63-LYS.NZ     48.81
+     64-GLU.N      -0.00
+     64-GLU.CA      0.00
+     64-GLU.C       1.16
+     64-GLU.O      19.92
+     64-GLU.CB     11.86
+     64-GLU.CG      6.09
+     64-GLU.CD      1.64
+     64-GLU.OE1    18.53
+     64-GLU.OE2    10.07
+     65-SER.N      -0.00
+     65-SER.CA      8.05
+     65-SER.C       0.00
+     65-SER.O      -0.00
+     65-SER.CB      0.00
+     65-SER.OG      0.86
+     66-THR.N       3.06
+     66-THR.CA      0.00
+     66-THR.C       0.00
+     66-THR.O      -0.00
+     66-THR.CB      3.61
+     66-THR.OG1    19.64
+     66-THR.CG2     0.35
+     67-LEU.N      -0.00
+     67-LEU.CA      0.00
+     67-LEU.C       0.00
+     67-LEU.O      -0.00
+     67-LEU.CB      0.00
+     67-LEU.CG      0.00
+     67-LEU.CD1     0.32
+     67-LEU.CD2     0.00
+     68-HIS.N      -0.00
+     68-HIS.CA      0.00
+     68-HIS.C       0.00
+     68-HIS.O      -0.00
+     68-HIS.CB      8.82
+     68-HIS.CG      3.80
+     68-HIS.ND1    13.31
+     68-HIS.CD2     2.77
+     68-HIS.CE1    15.83
+     68-HIS.NE2     8.15
+     69-LEU.N       0.03
+     69-LEU.CA      0.00
+     69-LEU.C       0.00
+     69-LEU.O       0.43
+     69-LEU.CB      0.00
+     69-LEU.CG      0.00
+     69-LEU.CD1     0.00
+     69-LEU.CD2     1.48
+     70-VAL.N      -0.00
+     70-VAL.CA      0.00
+     70-VAL.C       0.00
+     70-VAL.O      -0.00
+     70-VAL.CB      0.00
+     70-VAL.CG1    20.19
+     70-VAL.CG2    16.17
+     71-LEU.N       1.73
+     71-LEU.CA      0.00
+     71-LEU.C       0.45
+     71-LEU.O      26.10
+     71-LEU.CB     11.61
+     71-LEU.CG      0.00
+     71-LEU.CD1     0.01
+     71-LEU.CD2    30.99
+     72-ARG.N      -0.00
+     72-ARG.CA      6.34
+     72-ARG.C       0.00
+     72-ARG.O       1.22
+     72-ARG.CB     13.31
+     72-ARG.CG     14.94
+     72-ARG.CD     21.11
+     72-ARG.NE     -0.00
+     72-ARG.CZ      2.00
+     72-ARG.NH1    43.57
+     72-ARG.NH2     4.37
+     73-LEU.N       6.26
+     73-LEU.CA      0.00
+     73-LEU.C       0.01
+     73-LEU.O      25.40
+     73-LEU.CB      8.37
+     73-LEU.CG      8.37
+     73-LEU.CD1     2.88
+     73-LEU.CD2    55.66
+     74-ARG.N       5.19
+     74-ARG.CA      2.57
+     74-ARG.C       1.68
+     74-ARG.O      30.81
+     74-ARG.CB      5.02
+     74-ARG.CG     26.78
+     74-ARG.CD     22.33
+     74-ARG.NE     18.83
+     74-ARG.CZ      7.70
+     74-ARG.NH1    25.22
+     74-ARG.NH2    55.72
+     75-GLY.N       9.37
+     75-GLY.CA     26.58
+     75-GLY.C       6.41
+     75-GLY.O      11.12
+     76-GLY.N       9.44
+     76-GLY.CA     29.39
+     76-GLY.C       9.08
+     76-GLY.O      51.50
+     76-GLY.OXT    46.62
+     77-HOH.O      52.69
+     78-HOH.O      20.80
+     79-HOH.O       9.92
+     80-HOH.O      29.68
+     81-HOH.O      18.73
+     82-HOH.O      67.46
+     83-HOH.O      54.40
+     84-HOH.O      24.34
+     85-HOH.O      42.21
+     86-HOH.O      22.82
+     87-HOH.O      25.18
+     88-HOH.O      17.58
+     89-HOH.O      74.48
+     90-HOH.O      41.79
+     91-HOH.O      36.25
+     92-HOH.O      47.75
+     93-HOH.O      70.77
+     94-HOH.O      13.80
+     95-HOH.O      46.75
+     96-HOH.O      14.13
+     97-HOH.O      38.48
+     98-HOH.O      14.16
+     99-HOH.O      11.46
+    100-HOH.O      20.15
+    101-HOH.O      12.54
+    102-HOH.O      16.49
+    103-HOH.O      29.00
+    104-HOH.O       2.60
+    105-HOH.O      28.72
+    106-HOH.O      43.53
+    107-HOH.O      10.95
+    108-HOH.O      25.26
+    109-HOH.O      75.62
+    110-HOH.O      22.52
+    111-HOH.O      61.77
+    112-HOH.O      42.07
+    113-HOH.O      57.78
+    114-HOH.O      72.31
+    115-HOH.O      59.02
+    116-HOH.O      59.96
+    117-HOH.O      49.53
+    118-HOH.O      55.57
+    119-HOH.O      60.16
+    120-HOH.O      59.77
+    121-HOH.O      26.38
+    122-HOH.O      21.11
+    123-HOH.O      62.14
+    124-HOH.O      51.01
+    125-HOH.O      28.36
+    126-HOH.O      89.41
+    127-HOH.O      27.35
+    128-HOH.O      26.63
+    129-HOH.O      72.58
+    130-HOH.O      71.90
+    131-HOH.O      22.99
+    132-HOH.O      35.32
+    133-HOH.O      50.24
+    134-HOH.O      81.78
+
+
+
+
+.. code-block:: default
+   :lineno-start: 60
+
+
+    print("Total SASA:", sum(sasa_per_atom))
+    print("Elapsed time: %.3f s"%(t_end - t_start))
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+    Total SASA: 5724.286432791293
+    Elapsed time: 0.047 s
+
+
+
+Oftentimes it's required to calculate SASA of particular site
+
+To avoid unwanted calculation one can provide indices of atoms of interest:
+
+
+
+.. code-block:: default
+   :lineno-start: 68
+
+    from pyxmolpp2.polymer import rId
+
+    index = atoms.index(rId <= 5) # take indices of first 5 residues
+
+    t_start = timer()
+    first_5_residues_sasa =  pyxmolpp2.geometry.calc_sasa(atoms.toCoords,
+                                                          vdw_radii,
+                                                          solvent_radius,
+                                                          index,
+                                                          n_samples=20
+                                                          )
+
+    t_end = timer()
+
+    # Print all sasa values
+    print("Per-atom SASA")
+    for sasa, a in zip(first_5_residues_sasa, atoms[index]):
+        print("{:3d}-{:3s}.{:4s} {:7.2f}".format(a.rId.serial, a.rName.str, a.name.str, sasa))
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+    Per-atom SASA
+      1-MET.N       0.21
+      1-MET.CA      5.09
+      1-MET.C       0.00
+      1-MET.O      -0.00
+      1-MET.CB      3.03
+      1-MET.CG      0.00
+      1-MET.SD      0.07
+      1-MET.CE      0.00
+      2-GLN.N       1.08
+      2-GLN.CA      0.00
+      2-GLN.C       0.00
+      2-GLN.O      -0.00
+      2-GLN.CB      6.13
+      2-GLN.CG      0.50
+      2-GLN.CD      1.93
+      2-GLN.OE1    35.78
+      2-GLN.NE2    25.92
+      3-ILE.N      -0.00
+      3-ILE.CA      0.00
+      3-ILE.C       0.00
+      3-ILE.O      -0.00
+      3-ILE.CB      0.00
+      3-ILE.CG1     0.00
+      3-ILE.CG2     0.00
+      3-ILE.CD1     0.00
+      4-PHE.N      -0.00
+      4-PHE.CA      0.00
+      4-PHE.C       0.00
+      4-PHE.O      -0.00
+      4-PHE.CB      0.02
+      4-PHE.CG      2.43
+      4-PHE.CD1     3.21
+      4-PHE.CD2     5.43
+      4-PHE.CE1     8.99
+      4-PHE.CE2    16.03
+      4-PHE.CZ     18.01
+      5-VAL.N      -0.00
+      5-VAL.CA      0.00
+      5-VAL.C       0.00
+      5-VAL.O      -0.00
+      5-VAL.CB      0.00
+      5-VAL.CG1     0.78
+      5-VAL.CG2     0.00
+
+
+
+
+.. code-block:: default
+   :lineno-start: 87
+
+    print("1-5 residues SASA (20 samples):", sum(first_5_residues_sasa))
+    print("Elapsed time: %.3f s"%(t_end - t_start))
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+    1-5 residues SASA (20 samples): 134.64708382972827
+    Elapsed time: 0.004 s
+
+
+
+
+.. code-block:: default
+   :lineno-start: 91
+
+    t_start = timer()
+    first_5_residues_sasa =  pyxmolpp2.geometry.calc_sasa(atoms.toCoords,
+                                                          vdw_radii,
+                                                          solvent_radius,
+                                                          index,
+                                                          n_samples=200
+                                                          )
+
+    t_end = timer()
+    print("1-5 residues SASA (200 samples):", sum(first_5_residues_sasa))
+    print("Elapsed time: %.3f s"%(t_end - t_start))
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+    1-5 residues SASA (200 samples): 134.40025523434565
+    Elapsed time: 0.026 s
+
+
+
+
+.. rst-class:: sphx-glr-timing
+
+   **Total running time of the script:** ( 0 minutes  0.168 seconds)
+
+
+.. _sphx_glr_download_auto_examples_basics_SASA.py:
+
+
+.. only :: html
+
+ .. container:: sphx-glr-footer
+    :class: sphx-glr-footer-example
+
+
+
+  .. container:: sphx-glr-download
+
+     :download:`Download Python source code: SASA.py <SASA.py>`
+
+
+
+  .. container:: sphx-glr-download
+
+     :download:`Download Jupyter notebook: SASA.ipynb <SASA.ipynb>`
+
+
+.. only:: html
+
+ .. rst-class:: sphx-glr-signature
+
+    `Gallery generated by Sphinx-Gallery <https://sphinx-gallery.github.io>`_

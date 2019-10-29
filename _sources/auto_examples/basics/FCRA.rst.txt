@@ -1,0 +1,329 @@
+.. note::
+    :class: sphx-glr-download-link-note
+
+    Click :ref:`here <sphx_glr_download_auto_examples_basics_FCRA.py>` to download the full example code
+.. rst-class:: sphx-glr-example-title
+
+.. _sphx_glr_auto_examples_basics_FCRA.py:
+
+
+
+
+.. |Atom| replace:: :py:class:`~pyxmolpp2.polymer.Atom`
+.. |Residue| replace:: :py:class:`~pyxmolpp2.polymer.Residue`
+.. |Chain| replace:: :py:class:`~pyxmolpp2.polymer.Chain`
+.. |Frame| replace:: :py:class:`~pyxmolpp2.polymer.Frame`
+
+.. |AtomSelection| replace:: :py:class:`~pyxmolpp2.polymer.AtomSelection`
+.. |ResidueSelection| replace:: :py:class:`~pyxmolpp2.polymer.ResidueSelection`
+.. |ChainSelection| replace:: :py:class:`~pyxmolpp2.polymer.ChainSelection`
+
+
+
+Frame/Chain/Residue/Atom hierarchy
+----------------------------------
+
+
+The `pyxmolpp2` library implements |Frame|/|Chain|/|Residue|/|Atom| hierarchy to represent a molecular system.
+
+Every |Atom| exists as a part of some |Residue|. |Residue| is always a part of |Chain|. |Chain| is always a part of |Frame|.
+
+For instance this implies that you can not create an |Atom| without pre-existed |Residue|.
+Why not allow ``Atom.residue`` to be :py:class:`None` if Atom exists by it's own?
+The choice was between flexibility of construction code versus complexity of it's further usage.
+The rationale behind that design decision is fact that expression ``atom.residue.chain.frame.index``
+is always correct, and no `not-None` checks are required. Such checks across the library and user code would
+increases it's complexity and make it more prone to errors.
+
+
+
+.. danger::
+    |Atom|/|Residue|/|Chain| is alive until it's |Frame| exists. |Frame| exists until python holds a reference to it.
+    No frame - no game.
+
+
+
+
+.. code-block:: default
+   :lineno-start: 40
+
+
+
+    import pyxmolpp2
+    import os
+
+    pdb_filename = os.path.join(os.environ["TEST_DATA_PATH"], "pdb/rcsb/1UBQ.pdb")
+    pdb_file = pyxmolpp2.pdb.PdbFile(pdb_filename)
+
+    frame = pdb_file.get_frame()
+
+
+
+
+
+
+
+
+.. code-block:: default
+   :lineno-start: 50
+
+
+    # print chain names of 1UBQ entry
+    print([ chain.name.str for chain in frame.asChains ])
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+    ['A', 'A']
+
+
+
+
+.. code-block:: default
+   :lineno-start: 55
+
+
+    # print residue names of 1UBQ entry
+    print([ res.name.str for res in frame.asResidues])
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+    ['MET', 'GLN', 'ILE', 'PHE', 'VAL', 'LYS', 'THR', 'LEU', 'THR', 'GLY', 'LYS', 'THR', 'ILE', 'THR', 'LEU', 'GLU', 'VAL', 'GLU', 'PRO', 'SER', 'ASP', 'THR', 'ILE', 'GLU', 'ASN', 'VAL', 'LYS', 'ALA', 'LYS', 'ILE', 'GLN', 'ASP', 'LYS', 'GLU', 'GLY', 'ILE', 'PRO', 'PRO', 'ASP', 'GLN', 'GLN', 'ARG', 'LEU', 'ILE', 'PHE', 'ALA', 'GLY', 'LYS', 'GLN', 'LEU', 'GLU', 'ASP', 'GLY', 'ARG', 'THR', 'LEU', 'SER', 'ASP', 'TYR', 'ASN', 'ILE', 'GLN', 'LYS', 'GLU', 'SER', 'THR', 'LEU', 'HIS', 'LEU', 'VAL', 'LEU', 'ARG', 'LEU', 'ARG', 'GLY', 'GLY', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH', 'HOH']
+
+
+
+print info about first atom:
+
+
+.. code-block:: default
+   :lineno-start: 60
+
+    a = frame.asAtoms[0]
+    from tabulate import tabulate
+
+    print(tabulate([
+        ("name", a.name),
+        ("id", a.id),
+        ("[x,y,z]", a.r),
+        ("rId", a.rId),
+        ("rName", a.rName),
+        ("cName", a.cName),
+    ]))
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+    -------  --------------------------------
+    name     N
+    id       1
+    [x,y,z]  [27.340000, 24.430000, 2.614000]
+    rId      1
+    rName    MET
+    cName    A
+    -------  --------------------------------
+
+
+
+we can find frame by atom
+
+
+.. code-block:: default
+   :lineno-start: 74
+
+    assert a.frame == frame
+
+
+
+
+
+
+
+If you destroy all references to frame it will be eliminated with all it's content
+
+
+.. code-block:: default
+   :lineno-start: 79
+
+
+    asel = frame.asAtoms    # valid as long reference to frame exists
+    rsel = frame.asResidues # valid as long reference to frame exists
+    csel = frame.asChains   # valid as long reference to frame exists
+    a = frame.asAtoms[0]    # valid as long reference to frame exists
+
+
+
+
+
+
+
+Let's `accidentally` destroy frame, by dropping only reference:
+
+
+.. code-block:: default
+   :lineno-start: 86
+
+    frame = None
+
+
+
+
+
+
+
+
+
+.. code-block:: default
+   :lineno-start: 90
+
+    try:
+        print(asel[0])
+    except pyxmolpp2.polymer.DeadAtomSelectionAccess as e:
+        print("AtomSelection error:")
+        print(e)
+        pass
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+    AtomSelection error:
+    Dead selection access in ::operator[]
+
+
+
+
+.. code-block:: default
+   :lineno-start: 98
+
+    try:
+        print(rsel[0])
+    except pyxmolpp2.polymer.DeadResidueSelectionAccess as e:
+        print("ResidueSelection error:")
+        print(e)
+        pass
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+    ResidueSelection error:
+    Dead selection access in ::operator[]
+
+
+
+
+.. code-block:: default
+   :lineno-start: 106
+
+    try:
+        print(csel[0])
+    except pyxmolpp2.polymer.DeadChainSelectionAccess as e:
+        print("ChainSelection error:")
+        print(e)
+        pass
+
+
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+    ChainSelection error:
+    Dead selection access in ::operator[]
+
+
+
+
+.. code-block:: default
+   :lineno-start: 118
+
+    try:
+        print(a.name)
+    except RuntimeError as e:
+        print("Atom access error:")
+        print(e)
+        pass
+
+
+
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+    Atom access error:
+    Deleted element access through reference
+
+
+
+
+.. rst-class:: sphx-glr-timing
+
+   **Total running time of the script:** ( 0 minutes  0.055 seconds)
+
+
+.. _sphx_glr_download_auto_examples_basics_FCRA.py:
+
+
+.. only :: html
+
+ .. container:: sphx-glr-footer
+    :class: sphx-glr-footer-example
+
+
+
+  .. container:: sphx-glr-download
+
+     :download:`Download Python source code: FCRA.py <FCRA.py>`
+
+
+
+  .. container:: sphx-glr-download
+
+     :download:`Download Jupyter notebook: FCRA.ipynb <FCRA.ipynb>`
+
+
+.. only:: html
+
+ .. rst-class:: sphx-glr-signature
+
+    `Gallery generated by Sphinx-Gallery <https://sphinx-gallery.github.io>`_

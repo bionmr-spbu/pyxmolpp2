@@ -1,0 +1,491 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Selections &mdash; pyxmolpp2 0.10.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="RMSD/RMSF calculation" href="RMSD.html" />
+    <link rel="prev" title="Torsion Angles" href="torsion_angle.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> pyxmolpp2
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.10
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Examples</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples gallery</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#read-write-pdb-files">Read/Write PDB files</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#basics">Basics</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="array_indexing.html">Numpy-style array indexing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="angles.html">AngleValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reorder_atoms.html">Reorder atoms/residues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FCRA.html">Frame/Chain/Residue/Atom hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="torsion_angle.html">Torsion Angles</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Selections</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#construction">Construction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#conversions">Conversions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#filter">Filter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#set-operations">Set operations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#invalidation-of-selection">Invalidation of selection</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="RMSD.html">RMSD/RMSF calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SASA.html">Solvent Accessible Solvent Area (SASA)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../pyxmolpp2/amber.html">pyxmolpp2.amber</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyxmolpp2/crystal.html">pyxmolpp2.crystal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyxmolpp2/geometry.html">pyxmolpp2.geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyxmolpp2/pdb.html">pyxmolpp2.pdb</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyxmolpp2/polymer.html">pyxmolpp2.polymer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyxmolpp2/trajectory.html">pyxmolpp2.trajectory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyxmolpp2/trjtool.html">pyxmolpp2.trjtool</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pyxmolpp2</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Examples gallery</a> &raquo;</li>
+        
+      <li>Selections</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/auto_examples/basics/selections.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-auto-examples-basics-selections-py"><span class="std std-ref">here</span></a> to download the full example code</p>
+</div>
+<div class="sphx-glr-example-title section" id="selections">
+<span id="sphx-glr-auto-examples-basics-selections-py"></span><h1>Selections<a class="headerlink" href="#selections" title="Permalink to this headline">¶</a></h1>
+<p><em>Selection</em> is ordered set of elements in <code class="docutils literal notranslate"><span class="pre">pyxmolpp2</span></code>. Order is defined as follows</p>
+<ol class="arabic simple">
+<li><p>if two elements belongs to same parent object, the order match their construction order</p></li>
+<li><p>otherwise, they ordered as their parents</p></li>
+<li><p><a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.Frame" title="pyxmolpp2.polymer.Frame"><code class="xref py py-class docutils literal notranslate"><span class="pre">Frame</span></code></a> references are ordered by <a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.Frame.index" title="pyxmolpp2.polymer.Frame.index"><code class="xref py py-attr docutils literal notranslate"><span class="pre">index</span></code></a></p></li>
+</ol>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>29
+30</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">import</span> <span class="nn">pyxmolpp2</span>
+ <span class="kn">import</span> <span class="nn">os</span>
+</pre></div>
+</td></tr></table></div>
+<p>Let’s create a frame to work with</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>35
+36
+37
+38</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">pdb_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;TEST_DATA_PATH&quot;</span><span class="p">],</span> <span class="s2">&quot;pdb/rcsb/1UBQ.pdb&quot;</span><span class="p">)</span>
+ <span class="n">pdb_file</span> <span class="o">=</span> <span class="n">pyxmolpp2</span><span class="o">.</span><span class="n">pdb</span><span class="o">.</span><span class="n">PdbFile</span><span class="p">(</span><span class="n">pdb_filename</span><span class="p">)</span>
+
+ <span class="n">frame</span> <span class="o">=</span> <span class="n">pdb_file</span><span class="o">.</span><span class="n">get_frame</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<p>Library has three types of <cite>selections</cite>: <a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.AtomSelection" title="pyxmolpp2.polymer.AtomSelection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AtomSelection</span></code></a>, <a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.ResidueSelection" title="pyxmolpp2.polymer.ResidueSelection"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResidueSelection</span></code></a> and <a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.ChainSelection" title="pyxmolpp2.polymer.ChainSelection"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChainSelection</span></code></a></p>
+<div class="section" id="construction">
+<h2>Construction<a class="headerlink" href="#construction" title="Permalink to this headline">¶</a></h2>
+<p>Any selections might be created from <a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.Frame" title="pyxmolpp2.polymer.Frame"><code class="xref py py-class docutils literal notranslate"><span class="pre">Frame</span></code></a> instance:</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>48
+49
+50</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="nb">print</span><span class="p">(</span><span class="n">frame</span><span class="o">.</span><span class="n">asChains</span><span class="p">)</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">frame</span><span class="o">.</span><span class="n">asResidues</span><span class="p">)</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">frame</span><span class="o">.</span><span class="n">asAtoms</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;pyxmolpp2.polymer.ChainSelection size=2 at 0x00000000020689E0&gt;
+&lt;pyxmolpp2.polymer.ResidueSelection size=134 at 0x0000000001246630&gt;
+&lt;pyxmolpp2.polymer.AtomSelection size=660 at 0x00000000020946B0&gt;
+</pre></div>
+</div>
+<p><a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.AtomSelection" title="pyxmolpp2.polymer.AtomSelection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AtomSelection</span></code></a> and <a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.ResidueSelection" title="pyxmolpp2.polymer.ResidueSelection"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResidueSelection</span></code></a> can be created from <a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.Chain" title="pyxmolpp2.polymer.Chain"><code class="xref py py-class docutils literal notranslate"><span class="pre">Chain</span></code></a>:</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>55
+56
+57</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">chain</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">asChains</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">asResidues</span><span class="p">)</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">asAtoms</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;pyxmolpp2.polymer.ResidueSelection size=76 at 0x00000000020689E0&gt;
+&lt;pyxmolpp2.polymer.AtomSelection size=602 at 0x000000000207D420&gt;
+</pre></div>
+</div>
+<p><a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.AtomSelection" title="pyxmolpp2.polymer.AtomSelection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AtomSelection</span></code></a> can be created from a <a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.Residue" title="pyxmolpp2.polymer.Residue"><code class="xref py py-class docutils literal notranslate"><span class="pre">Residue</span></code></a>:</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>62
+63</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">residue</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">asResidues</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">residue</span><span class="o">.</span><span class="n">asAtoms</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;pyxmolpp2.polymer.AtomSelection size=8 at 0x0000000002076D20&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="conversions">
+<h2>Conversions<a class="headerlink" href="#conversions" title="Permalink to this headline">¶</a></h2>
+<p>Selections might be converted up and down through hierarchy:</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>71
+72
+73</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="nb">print</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">asAtoms</span><span class="o">.</span><span class="n">asResidues</span><span class="p">)</span>  <span class="c1"># selects non-empty residues</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">frame</span><span class="o">.</span><span class="n">asResidues</span><span class="o">.</span><span class="n">asChains</span><span class="p">)</span>  <span class="c1"># selects chains with at least 1 residue</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">frame</span><span class="o">.</span><span class="n">asChains</span><span class="o">.</span><span class="n">asResidues</span><span class="o">.</span><span class="n">asAtoms</span><span class="o">.</span><span class="n">asResidues</span><span class="o">.</span><span class="n">asChains</span><span class="p">)</span>  <span class="c1"># select chains with at least 1 non-empty residue</span>
+</pre></div>
+</td></tr></table></div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;pyxmolpp2.polymer.ResidueSelection size=76 at 0x0000000002067440&gt;
+&lt;pyxmolpp2.polymer.ChainSelection size=2 at 0x00000000020689E0&gt;
+&lt;pyxmolpp2.polymer.ChainSelection size=2 at 0x0000000002073680&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="filter">
+<h2>Filter<a class="headerlink" href="#filter" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">filter</span></code> method return new selection with elements that match predicate:</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>82
+83
+84
+85
+86</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">pyxmolpp2.polymer</span> <span class="k">import</span> <span class="n">AtomName</span><span class="p">,</span> <span class="n">ResidueName</span>
+
+ <span class="n">chain</span><span class="o">.</span><span class="n">asAtoms</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">a</span><span class="o">.</span><span class="n">r</span><span class="o">.</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># select atoms with negative x coord</span>
+ <span class="n">chain</span><span class="o">.</span><span class="n">asAtoms</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">a</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">AtomName</span><span class="p">(</span><span class="s2">&quot;CA&quot;</span><span class="p">))</span>  <span class="c1"># select CA atoms</span>
+ <span class="n">chain</span><span class="o">.</span><span class="n">asResidues</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">ResidueName</span><span class="p">(</span><span class="s2">&quot;LYS&quot;</span><span class="p">))</span>  <span class="c1"># select LYS residues</span>
+</pre></div>
+</td></tr></table></div>
+<p><code class="docutils literal notranslate"><span class="pre">pyxmolpp2</span></code> defines predicate-generators which return predicate when compared to something:</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>92
+93
+94
+95
+96</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">pyxmolpp2.polymer</span> <span class="k">import</span> <span class="n">aName</span><span class="p">,</span> <span class="n">rName</span><span class="p">,</span> <span class="n">aId</span><span class="p">,</span> <span class="n">rId</span><span class="p">,</span> <span class="n">cName</span><span class="p">,</span> <span class="n">cIndex</span>
+
+ <span class="n">frame</span><span class="o">.</span><span class="n">asAtoms</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">aName</span> <span class="o">==</span> <span class="s2">&quot;CA&quot;</span><span class="p">)</span>  <span class="c1"># select CA atoms</span>
+ <span class="n">frame</span><span class="o">.</span><span class="n">asResidues</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">rName</span> <span class="o">==</span> <span class="s2">&quot;LYS&quot;</span><span class="p">)</span>  <span class="c1"># select LYS residues</span>
+ <span class="n">frame</span><span class="o">.</span><span class="n">asChains</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">cName</span> <span class="o">==</span> <span class="s2">&quot;A&quot;</span><span class="p">)</span>  <span class="c1"># select chain(s) A</span>
+</pre></div>
+</td></tr></table></div>
+<p><a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.ChainPredicate" title="pyxmolpp2.polymer.ChainPredicate"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChainPredicate</span></code></a> and <a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.ResiduePredicate" title="pyxmolpp2.polymer.ResiduePredicate"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResiduePredicate</span></code></a> can be naturally applied to <a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.AtomSelection" title="pyxmolpp2.polymer.AtomSelection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AtomSelection</span></code></a>,
+while <a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.AtomPredicate" title="pyxmolpp2.polymer.AtomPredicate"><code class="xref py py-class docutils literal notranslate"><span class="pre">AtomPredicate</span></code></a> can be applied only to <a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.AtomSelection" title="pyxmolpp2.polymer.AtomSelection"><code class="xref py py-class docutils literal notranslate"><span class="pre">AtomSelection</span></code></a>.</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>102
+103</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">frame</span><span class="o">.</span><span class="n">asAtoms</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">aName</span> <span class="o">==</span> <span class="s2">&quot;CA&quot;</span><span class="p">)</span>  <span class="c1"># select CA atoms</span>
+ <span class="n">frame</span><span class="o">.</span><span class="n">asAtoms</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">rName</span> <span class="o">==</span> <span class="s2">&quot;LYS&quot;</span><span class="p">)</span>  <span class="c1"># select all atoms of LYS residues</span>
+</pre></div>
+</td></tr></table></div>
+<p>Application of <a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.AtomPredicate" title="pyxmolpp2.polymer.AtomPredicate"><code class="xref py py-class docutils literal notranslate"><span class="pre">AtomPredicate</span></code></a> to <a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.ResidueSelection" title="pyxmolpp2.polymer.ResidueSelection"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResidueSelection</span></code></a> or <a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.ChainSelection" title="pyxmolpp2.polymer.ChainSelection"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChainSelection</span></code></a> leads to <code class="xref py py-class docutils literal notranslate"><span class="pre">TypeError</span></code> exception.
+Same stands for <a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.ResiduePredicate" title="pyxmolpp2.polymer.ResiduePredicate"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResiduePredicate</span></code></a> and <a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.ChainSelection" title="pyxmolpp2.polymer.ChainSelection"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChainSelection</span></code></a>:</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>109
+110
+111
+112</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="k">try</span><span class="p">:</span>
+     <span class="nb">print</span><span class="p">(</span><span class="n">frame</span><span class="o">.</span><span class="n">asResidues</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">aName</span> <span class="o">==</span> <span class="s2">&quot;CA&quot;</span><span class="p">))</span>
+ <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+     <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>__call__(): incompatible function arguments. The following argument types are supported:
+    1. (self: pyxmolpp2.polymer.AtomPredicate, arg0: pyxmolpp2.polymer.Atom) -&gt; bool
+
+Invoked with: &lt;pyxmolpp2.polymer.AtomPredicate object at 0x2b64cf0fd260&gt;, &lt;pyxmolpp2.polymer.Residue id=1 name=&quot;MET&quot; at 0x0000000002095FE0&gt;
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>115
+116
+117
+118</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="k">try</span><span class="p">:</span>
+     <span class="nb">print</span><span class="p">(</span><span class="n">frame</span><span class="o">.</span><span class="n">asChains</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">aName</span> <span class="o">==</span> <span class="s2">&quot;CA&quot;</span><span class="p">))</span>
+ <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+     <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>__call__(): incompatible function arguments. The following argument types are supported:
+    1. (self: pyxmolpp2.polymer.AtomPredicate, arg0: pyxmolpp2.polymer.Atom) -&gt; bool
+
+Invoked with: &lt;pyxmolpp2.polymer.AtomPredicate object at 0x2b64cf0fd260&gt;, &lt;pyxmolpp2.polymer.Chain index=0 name=&quot;A&quot; at 0x0000000002080820&gt;
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>121
+122
+123
+124</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="k">try</span><span class="p">:</span>
+     <span class="nb">print</span><span class="p">(</span><span class="n">frame</span><span class="o">.</span><span class="n">asChains</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">rName</span> <span class="o">==</span> <span class="s2">&quot;LYS&quot;</span><span class="p">))</span>
+ <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+     <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>__call__(): incompatible function arguments. The following argument types are supported:
+    1. (self: pyxmolpp2.polymer.ResiduePredicate, arg0: pyxmolpp2.polymer.Residue) -&gt; bool
+    2. (self: pyxmolpp2.polymer.ResiduePredicate, arg0: pyxmolpp2.polymer.Atom) -&gt; bool
+
+Invoked with: &lt;pyxmolpp2.polymer.ResiduePredicate object at 0x2b64cf0fd260&gt;, &lt;pyxmolpp2.polymer.Chain index=0 name=&quot;A&quot; at 0x0000000002080820&gt;
+</pre></div>
+</div>
+<p>Predicates can be combined using <code class="docutils literal notranslate"><span class="pre">&amp;</span></code>, <code class="docutils literal notranslate"><span class="pre">|</span></code>, <code class="docutils literal notranslate"><span class="pre">~</span></code> operators and reused:</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>131
+132
+133
+134
+135</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">pyxmolpp2.polymer</span> <span class="k">import</span> <span class="n">AtomPredicate</span>
+
+ <span class="n">criteria</span> <span class="o">=</span> <span class="p">(</span><span class="n">aName</span> <span class="o">==</span> <span class="s2">&quot;CA&quot;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">rId</span><span class="o">.</span><span class="n">is_in</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">})</span> <span class="o">&amp;</span> <span class="n">AtomPredicate</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">a</span><span class="o">.</span><span class="n">r</span><span class="o">.</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># type:AtomPredicate</span>
+
+ <span class="nb">print</span><span class="p">(</span><span class="n">frame</span><span class="o">.</span><span class="n">asAtoms</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">criteria</span> <span class="o">|</span> <span class="n">cName</span><span class="o">.</span><span class="n">is_in</span><span class="p">({</span><span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">,</span> <span class="s2">&quot;Z&quot;</span><span class="p">})))</span>
+</pre></div>
+</td></tr></table></div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;pyxmolpp2.polymer.AtomSelection size=0 at 0x00000000020BDE50&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="set-operations">
+<h2>Set operations<a class="headerlink" href="#set-operations" title="Permalink to this headline">¶</a></h2>
+<p>Selections support set operations:</p>
+<ul class="simple">
+<li><p><cite>union</cite> (operators <code class="docutils literal notranslate"><span class="pre">+</span></code>, <code class="docutils literal notranslate"><span class="pre">+=</span></code>)</p></li>
+<li><p><cite>set intersection</cite> (operators <code class="docutils literal notranslate"><span class="pre">*</span></code>, <code class="docutils literal notranslate"><span class="pre">*=</span></code>)</p></li>
+<li><p><cite>difference</cite> (operators <code class="docutils literal notranslate"><span class="pre">-</span></code>, <code class="docutils literal notranslate"><span class="pre">-=</span></code>)</p></li>
+</ul>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>148
+149
+150
+151
+152
+153
+154
+155</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">A</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">asAtoms</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">a</span><span class="o">.</span><span class="n">r</span><span class="o">.</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">)</span>
+ <span class="n">B</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">asAtoms</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">a</span><span class="o">.</span><span class="n">r</span><span class="o">.</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">)</span>
+
+ <span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="o">+</span><span class="n">B</span><span class="p">)</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="o">-</span><span class="n">B</span><span class="p">)</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="o">*</span><span class="n">B</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;pyxmolpp2.polymer.AtomSelection size=660 at 0x00000000020BFAA0&gt;
+&lt;pyxmolpp2.polymer.AtomSelection size=0 at 0x00000000020C3E40&gt;
+&lt;pyxmolpp2.polymer.AtomSelection size=660 at 0x00000000020AD630&gt;
+&lt;pyxmolpp2.polymer.AtomSelection size=660 at 0x00000000020BD0A0&gt;
+&lt;pyxmolpp2.polymer.AtomSelection size=0 at 0x00000000020AD670&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="invalidation-of-selection">
+<h2>Invalidation of selection<a class="headerlink" href="#invalidation-of-selection" title="Permalink to this headline">¶</a></h2>
+<p>In execution of the program selection may be marked as <cite>invalid</cite>, i.e. further access
+to it’s elements raises an exception.</p>
+<p>Selection gets invalidated on:</p>
+<ul>
+<li><p>destruction of any of it’s elements parent (Primary this happens on deletion of a whole <a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.Frame" title="pyxmolpp2.polymer.Frame"><code class="xref py py-class docutils literal notranslate"><span class="pre">Frame</span></code></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The exception will be raised so you will know that you are doing something wrong.</p>
+</div>
+</li>
+<li><p>on <a class="reference internal" href="../../pyxmolpp2/polymer.html#pyxmolpp2.polymer.Frame.index" title="pyxmolpp2.polymer.Frame.index"><code class="xref py py-attr docutils literal notranslate"><span class="pre">index</span></code></a> change if selection had elements from two frames or more.</p>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>Currently there is no runtime checks against this type of errors for sake of performance.
+Please make sure you don’t do that</p>
+</div>
+</li>
+</ul>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.062 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-basics-selections-py">
+<div class="sphx-glr-download docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/da465122ce7f736b130a4c0498c6d735/selections.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">selections.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/ce2bf53de3258de898a31208673df3ec/selections.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">selections.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="RMSD.html" class="btn btn-neutral float-right" title="RMSD/RMSF calculation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="torsion_angle.html" class="btn btn-neutral float-left" title="Torsion Angles" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Sergei Izmailov
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

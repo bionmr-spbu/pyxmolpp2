@@ -1,0 +1,375 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Numpy-style array indexing &mdash; pyxmolpp2 0.10.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="AngleValue" href="angles.html" />
+    <link rel="prev" title="Non-standard PDB io" href="../PDB/read_write_non_standard_pdb.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> pyxmolpp2
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.10
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Examples</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples gallery</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#read-write-pdb-files">Read/Write PDB files</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#basics">Basics</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Numpy-style array indexing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="angles.html">AngleValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reorder_atoms.html">Reorder atoms/residues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FCRA.html">Frame/Chain/Residue/Atom hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="torsion_angle.html">Torsion Angles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="selections.html">Selections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="RMSD.html">RMSD/RMSF calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SASA.html">Solvent Accessible Solvent Area (SASA)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../pyxmolpp2/amber.html">pyxmolpp2.amber</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyxmolpp2/crystal.html">pyxmolpp2.crystal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyxmolpp2/geometry.html">pyxmolpp2.geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyxmolpp2/pdb.html">pyxmolpp2.pdb</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyxmolpp2/polymer.html">pyxmolpp2.polymer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyxmolpp2/trajectory.html">pyxmolpp2.trajectory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyxmolpp2/trjtool.html">pyxmolpp2.trjtool</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pyxmolpp2</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Examples gallery</a> &raquo;</li>
+        
+      <li>Numpy-style array indexing</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/auto_examples/basics/array_indexing.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-auto-examples-basics-array-indexing-py"><span class="std std-ref">here</span></a> to download the full example code</p>
+</div>
+<div class="sphx-glr-example-title section" id="numpy-style-array-indexing">
+<span id="examples-array-indexing"></span><span id="sphx-glr-auto-examples-basics-array-indexing-py"></span><h1>Numpy-style array indexing<a class="headerlink" href="#numpy-style-array-indexing" title="Permalink to this headline">¶</a></h1>
+<p>Syntax shortcuts are available for construction index by predicate from AtomSeleciton/ResidueSelection/ChainSelection
+and vice versa:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">index</span> <span class="o">=</span> <span class="n">sel</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">predicate</span><span class="p">)</span>
+<span class="n">subset</span> <span class="o">=</span> <span class="n">sel</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>19
+20
+21
+22</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">import</span> <span class="nn">pyxmolpp2</span>
+ <span class="kn">import</span> <span class="nn">os</span>
+
+ <span class="kn">from</span> <span class="nn">pyxmolpp2.polymer</span> <span class="k">import</span> <span class="n">aName</span>
+</pre></div>
+</td></tr></table></div>
+<p>Let’s create a frame to work with</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>27
+28
+29</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">pdb_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;TEST_DATA_PATH&quot;</span><span class="p">],</span> <span class="s2">&quot;pdb/rcsb/1UBQ.pdb&quot;</span><span class="p">)</span>
+ <span class="n">pdb_file</span> <span class="o">=</span> <span class="n">pyxmolpp2</span><span class="o">.</span><span class="n">pdb</span><span class="o">.</span><span class="n">PdbFile</span><span class="p">(</span><span class="n">pdb_filename</span><span class="p">)</span>
+ <span class="n">frame</span> <span class="o">=</span> <span class="n">pdb_file</span><span class="o">.</span><span class="n">get_frame</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>34
+35
+36
+37
+38</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">atoms</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">asAtoms</span>
+
+ <span class="c1"># find indices in given selection by predicate</span>
+ <span class="n">ca_index</span> <span class="o">=</span> <span class="n">atoms</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">aName</span><span class="o">==</span><span class="s2">&quot;CA&quot;</span><span class="p">)</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">ca_index</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[  1   9  18  26  37  44  53  60  68  75  79  88  95 103 110 118 127 134
+ 143 150 156 164 171 179 188 196 203 212 217 226 234 243 251 260 269 273
+ 281 288 295 303 312 321 332 340 348 359 364 368 377 386 394 403 411 415
+ 426 433 441 447 455 467 475 483 492 501 510 516 523 531 541 549 556 564
+ 575 583 594 598]
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>42
+43</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="k">for</span> <span class="n">ca</span> <span class="ow">in</span> <span class="n">atoms</span><span class="p">[</span><span class="n">ca_index</span><span class="p">]:</span>
+     <span class="nb">print</span><span class="p">(</span><span class="n">ca</span><span class="o">.</span><span class="n">rId</span><span class="p">,</span> <span class="n">ca</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>1 CA
+2 CA
+3 CA
+4 CA
+5 CA
+6 CA
+7 CA
+8 CA
+9 CA
+10 CA
+11 CA
+12 CA
+13 CA
+14 CA
+15 CA
+16 CA
+17 CA
+18 CA
+19 CA
+20 CA
+21 CA
+22 CA
+23 CA
+24 CA
+25 CA
+26 CA
+27 CA
+28 CA
+29 CA
+30 CA
+31 CA
+32 CA
+33 CA
+34 CA
+35 CA
+36 CA
+37 CA
+38 CA
+39 CA
+40 CA
+41 CA
+42 CA
+43 CA
+44 CA
+45 CA
+46 CA
+47 CA
+48 CA
+49 CA
+50 CA
+51 CA
+52 CA
+53 CA
+54 CA
+55 CA
+56 CA
+57 CA
+58 CA
+59 CA
+60 CA
+61 CA
+62 CA
+63 CA
+64 CA
+65 CA
+66 CA
+67 CA
+68 CA
+69 CA
+70 CA
+71 CA
+72 CA
+73 CA
+74 CA
+75 CA
+76 CA
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.047 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-basics-array-indexing-py">
+<div class="sphx-glr-download docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/337dd794f37b0c651b652b217d8eb201/array_indexing.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">array_indexing.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/fe1fbb89393b2c4e48f42eba87dca519/array_indexing.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">array_indexing.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="angles.html" class="btn btn-neutral float-right" title="AngleValue" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../PDB/read_write_non_standard_pdb.html" class="btn btn-neutral float-left" title="Non-standard PDB io" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Sergei Izmailov
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
